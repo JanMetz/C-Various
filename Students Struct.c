@@ -6,26 +6,28 @@ typedef struct student
 {
     char name [255];
     char surname [255];
-    int index;
+    const int index;
     char major [255];
     int current_year;
     char group [255];
 
 } student;
 
-void printer(student person);
+const void printer(const student person);
 void reader(student *person);
 int compare(const void* a, const void* b);
 
 const int K=15;
 
-int main()
-{
+int main(){
     student st, s_INF [K], *d_INF;
     int n=0, i=0;
 
+    do{
     printf("Insert number of students you would like to input: ");
     scanf("%d", &n);
+    } while (n < 1);
+
     d_INF = (student*) malloc(n*sizeof(student));
 
     printf("Please, input your personal data:\n");
@@ -35,15 +37,13 @@ int main()
 
 
     printf("\nPlease, input data about students from your group:\n");
-    for (i=0; i<4; i++)
-    {
+    for (i=0; i<4; i++){
         printf("-------------\n");
         reader(&s_INF[i]);
     }
 
     printf("\nPlease, input chosen quantity of data about other students:\n");
-    for (i=0; i<n; i++)
-    {
+    for (i=0; i<n; i++){
         printf("-------------\n");
         reader(&d_INF[i]);
     }
@@ -66,8 +66,7 @@ int main()
     free(d_INF);
 }
 
-void reader(student *person)
-{
+void reader(student *person){
 
     printf("Name: \n");
     fflush(stdout);
@@ -100,7 +99,7 @@ void reader(student *person)
 
 }
 
-void printer(student person)
+const void printer(const student person)
 {
     printf("Name: \t\t%s", person.name);
 
