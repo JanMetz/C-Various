@@ -51,17 +51,6 @@ void* receive(void* p){
    x = get();
    printf("%d\n", x); fflush(stdout);
 }
-
-void* f(void* p){
-    static int i;
-    static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-
-    pthread_mutex_lock(&mtx);
-    i++;
-    pthread_mutex_unlock(&mtx);
-
-    return NULL;
-}
  
 int main(){
    pthread_t tsnd_1, tsnd_2, trcv;
