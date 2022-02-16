@@ -1,0 +1,14 @@
+Aby uruchomic program nalezy uruchomic skrypt "choinkaMake.sh", a nastepnie wykonac plik "choinka.out".
+
+Koncepcja:
+program podzielilem na 2 czesci (funkcje) - swietego Mikolaja (funkcja claus) oraz skrzaty (funkcja brownie). Zadaniem skrzata jest umieszczenie dekoracji na choince. Choinka, z ktorej korzystaja skrzaty ma wiele poziomow. Aby zmienic poziom skrzat musi skorzystac z rusztowania, ktore ma okreslona nosnosc. Na kazdym poziomie choinki mozna umiescic tylko okreslona ilosc ozdob. Dzialania skrzata wygladaja nastepujaco:
+1) pobiera ozdobe ze stosu pod choinka (o ile jest jakas dostepna, w przeciwnym wypadku czeka az Mikolaj dostarczy ozdobe)
+2) probuje umiescic ozdobe na swoim aktualnym poziomie
+3) jezeli umieszczenie ozdoby sie nie udalo to skrzat probuje wejsc na wyzszy poziom, w przeciwym wypadku przechodzi do punktu 5
+4) jezeli wejscie na wyzszy poziom sie nie udalo to skrzat konczy dzialanie, w przeciwnym wypadku nastepuje powrot do punktu 2
+5) po umieszczeniu ozdoby skrzat schodzi z poziomu, na ktorym aktualnie przebywa, az do poziomu 0
+
+
+Zadaniem Mikolaja jest dostarczenie dekoracji pod choinke. Jezeli dekoracji jest wiecej niz skrzatow to Mikolaj zawiesza swoje dzialania do momentu odebrania dekoracji przez jakiegos skrzata. Skrzat odbierajac ozdobe wysyla sygnal do Mikolaja.
+
+W tym samym momencie do bazy choinki (a wiec do dekoracji oraz zmiennej sygnalizujacych ich stan) dostep moze miec tylko jedna osoba (jeden ze skrzatow albo Mikolaj). Tak samo do zmiennych sterujacych dzialaniami skrzata (tj. do zmiennej okreslajacej aktualna ilosc ozdob na konkretnym poziomie czy aktualnego obciazenia rusztowania) moze miec dostep tylko jeden skrzat na raz. Wykluczanie odbywa sie za pomoca mutexow. W celu zapewnienia plynnosci dzialania programu skrzat wchodzacy moze wejsc na rusztowanie, jezeli robiac to nie przekroczy jego nosnosci liczonej z zapasem 1. Skrzat schodzacy moze skorzystac z pelnej nosnosci rusztowania. W ten sposob nie dojdzie do zakleszczenia skrzatow na rusztowaniu.
