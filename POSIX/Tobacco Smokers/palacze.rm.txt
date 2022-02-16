@@ -1,0 +1,18 @@
+Aby uruchomic program nalezy uruchomic skrypt "palaczeMake.sh", a nastepnie wykonac plik "palacze.out".
+
+Koncepcja:
+program podzielilem na 7 czesci (funkcji). Kazdy palacz ma poswiecone sobie 2 czesci: wysylajaca i odbierajaca. Jedna czesc przypada rowniez dla agenta. Dzialania palacza podzielone sa nastepujaco:
+w pierwszej czesci (wysylajacej) palacz, o ile zostal wybrany, wykonuje nastepujace czynnosci: 
+1) wysyla swoj zasob to nabywcy
+2) komunikuje fakt wyslania
+3) jezeli drugi potrzebny zasob juz zostal wyslany to "budzi" palacza odpowiedzialnego za skrecenie papierosa. W przeciwnym przypadku nie robi nic.
+
+w drugiej czesci (odbierajacej) palacz, o ile jest to jego kolej, wykonuje nastepujace czynnosci:
+1) odbiera potrzebne zasoby
+2) komunikuje fakt odebrania
+3) zwija papierosa i zaczyna go palic
+4) "budzi" agenta.
+
+Zadaniem agenta jest okreslic aktualne kursy kazdego z surowcow. Jezeli kurs i balans konta na to pozwalaja to palacz kupuje potrzebne skladniki. W przeciwnym wypadku czeka na zmiane warunkow. Zakup skladnikow odbywa sie za posrednictwem agenta.
+
+W tym samym momencie do stolu (a wiec i do zmiennych sygnalizujacych stan) dostep moze miec tylko jedna osoba (jeden z palaczy albo agent).
