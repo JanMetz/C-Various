@@ -4,11 +4,9 @@
 #include <stdbool.h>
  
 static volatile bool buf_full;
-static volatile int buf[5];
 static pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;
-static pthread_cond_t  cnd_empty = PTHREAD_COND_INITIALIZER,
-                cnd_full  = PTHREAD_COND_INITIALIZER;
- 
+static pthread_cond_t  cnd_empty = PTHREAD_COND_INITIALIZER;
+static pthread_cond_t  cnd_full  = PTHREAD_COND_INITIALIZER;
  
 void put(int x){
    pthread_mutex_lock( &mtx );
