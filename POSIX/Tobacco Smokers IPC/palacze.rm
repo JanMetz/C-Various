@@ -1,0 +1,16 @@
+Aby uruchomić program należy odpalić skrypt palaczeMake.sh, a następnie wykonać plik palacze.out.
+
+Program składa się z main'a oraz 2 funkcji. 
+Pierwsza funkcja - agent odpowiada za ustalenie cen rynkowych każdego z surowców, sprawdzenie czy któryś z palaczy może zakupić potrzebne składniki, oraz powiadomienie wszytskich uczestników o wyniki ewentulanej transakcji.
+
+Druga funkcja - palacz odpowiada za dostarczenie swojego zasobu do nabywcy lub odebraniu zasobów od innych palaczy i zapaleniu papierosa.
+
+Dostęp do zmiennych przechowujących ceny zasobów ma jednocześnie tylko jeden wątek, gdyż został on zabezpieczony semaforem binarnym. Zmienne przechowujące stan konta każdego z palaczy oraz ceny surowców zrealizowane są z użyciem pamięci współdzielonej. 
+
+W celu oczyszczenia nagłówków funkcji oraz większej czytelności argumenty potrzebne funkcjom do działania są przekazywane za pomocą struktur context - jedna taka struktura przechowuje dane potrzebne procesom do komunikacji czyli adresy pamięci współdzielonych, identyfikatory kolejek komunikatów oraz semaforów; Druga struktura przechowuje dane, które pozwoliły na ograniczenie ilości potrzebnych funkcji typu palacz z 3ch do 1ej. Przechowuje ona dane o palaczu (jego typ), wysyłanym zasobie, zasobach, których potrzebuje oraz części wiadomości wyświetlanej w czasie działania. 
+
+Do przesyłania materiałów oraz do powiadamiania o wynikach transakcji użyte zostały dwie kolejki komunikatów. Pierwsza z nich służy do przekazywania informacji o roli każdego palacza, gdzie jako rolę rozumie się podział na dawcę oraz biorcę (dawca dostarcza swój zasób, biorca zbiera potrzebne do skręcenia zasoby). Druga natomiast służy do przekazywania zasobów (tytoniu, zapałek i papieru) między palaczami (procesami). 
+
+Każdy palacz samodzielnie dba o stan swojego konta, modyfikując go zgodnie z zachodzącymi transakcjami. Stan początkowy kont każdego z palaczy został ustawiony na 20 monet. Ceny zasobów są ustalane przez agenta za pomocą liczb pseudolosowych i wahają się pomiędzy 1 a 4 monety za jednostkę zasobu pozwalającą na stworzenie papierosa. Jeżeli w trakcie działania programu nastąpi moment, w którym żaden z palaczy nie będzie w stanie kupić potrzebnych do skręcenia papierosa zasobów to program kończy działanie. 
+
+Do obsługi semaforów został użyty zaadaptowany fragment kodu z Kompendium Wiedzy UNIX udostępnionego przez Doktora. Przy poleceniach służących do odbioru wiadomości z kolejki komunikatów, jeżeli tylko pozwalała na to sytuacja, zastosowano flagę MSG_NOERROR w celu zapewnienia płynności działania programu. W miejsach gdzie flaga została użyta nieistotna jest całość treści komunikatu, a jedynie fakt jego odebrania.
