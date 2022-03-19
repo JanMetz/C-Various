@@ -1,0 +1,14 @@
+Aby uruchomić program należy wykonać skrypt czytelnicyMake.sh, a następnie plik czytelnicy.out
+
+Program zawiera:
+funkcję readABook odpowiedzialną za przeczytanie dzieła. Funkcja sprawdza, czy jakaś książka jest aktualnie dostępna, następnie "bierze" ją do "ręki" (odbiera wiadomość z kolejki komunikatów). Po "wzięciu" sprawdza czy dany czytelnik powinien tą książkę przeczytać - jeżeli tak to rozpoczyna czytanie. W następnym kroku książka jest "odkładana" na "półkę" (wysyłana spowrotem do kolejki), o ile istnieje conajmniej jedna osoba, która powinna ją przeczytać, a jeszcze tego nie zrobiła.  W przeciwnym wypadku książka jest "usuwana" z "półki".
+
+funkcję writeABook odpowiedzialną za napisanie dzieła. Funkcja sprawdza, czy pojemność półki z książkami nie zostanie przekroczona po dodaniu następnego dzieła. Jeżeli odpowiedź jest twierdząca to funkcja "pisze" dzieło, dołączając do niego listę osób, które powinny je przeczytać. Książka jest nastepnie umieszczana na "półce" (wysyłana do kolejki komunikatów).
+
+funkcję readerWriter symulującą działania czytelnika/pisarza. Czytelnik może znajdywać się w jednej z dwóch faz - fazie relaksu albo fazie korzystania z czytelni. W fazie relaksu czytelnik może zmienić swoją rolę na pisarza (lub odwrotnie), w fazie korzystania, po uzyskaniu dostępu do czytelni  we właściwym dla siebie trybie czyta książkę i wychodzi (jako czytelnik), albo czyta i pisze książkę, a następnie wychodzi (jako pisarz). Priorytet w dostępie do czytelni ma pisarz.
+
+funkcję semOp odpowiadającą za działania na semaforach dostępnych w zadaniu.
+
+funkcję main zawierającą inicjalizację potrzebnych do rozwiązania zadania zasobów takich jak semafory, pamięć współdzielona czy kolejka komunikatów.
+
+strukturę msgStruct służącą do wysyłania oraz odbierania wiadomości z kolejki komunikatów.
