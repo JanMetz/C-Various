@@ -1,0 +1,12 @@
+Aby uruchomić program należy wykonać plik portMake.sh a następnie uruchomić plik port.out
+
+Program składa się z:
+1) main'a, w którym inicjalizowane są wątki łodzi oraz, za pomocą generatora liczb pseudolosowych, ustalane wagi (a więc i potrzebne ilości holowników) dla każdego występującego w zadaniu statku. Wagi wahają się pomiędzy 1, a 5 jednostek. Założenie przy doborze holowników do konkretnej łodzi jest takie, iż każda łódź potrzebuje do sprawnego procesu cumowania i odcumowywania jednego holownika na jedną jednostkę masy. W celu umożliwienia ewentualnych zmian ilości dostępnych w doku miejsc, holowników, albo ilości statków zostały, za pomocą makra #define, zdefiniowane zmienne sterujące tymi wartościami. Zmienne te to: tugNum, shipsNum oraz docksNum. W funkcji main umieszczony jest również kawałek kodu odpowiedzialny za wyświetlenie użytkownikowi podstawowych informacji o zadaniu, takich jak: ilość dostępnych w doku miejsc, ilość dostępnych holowników, ilość występujących w zadaniu łodzi oraz waga każdej z nich.
+
+2) funkcji statek, która symuluje działanie statków korzystających z portu. Każdy statek przypływa w okolice portu, czeka, aż będzie w stanie dostać odpowiednią do swojej masy ilość holowników, następnie czeka, aż w porcie zwolni się miejsce, a następnie cumuje i "zwraca" obsługujące go holowniki do puli. Po chwili spędzonej w porcie statek opuszcza go. Wypływanie z portu dokonuje się analogicznie do wpływania, z tą różnicą, że statek nie musi czekać na zwolnienie doku. Każdy statek na zmianę wpływa i wypływa z portu. Fakt ten jest komunikowany na standardowe wyjście.
+
+
+Ilość dostępnych doków oraz dostępnych holowników są zmiennymi globalnymi typu static volatile, chronionymi przez mutexy. Dla zapewnienia płynności działania programu, oraz w celu zminimalizowania ryzyka zakleszczenia stworzone zostały również dwie zmienne typu pthread_cond_t, pozwalające na zasygnalizowanie, odpowiednio, zwolnienia miejsca w porcie albo zwolnienia holownika.
+
+Tablica przechowująca wagi poszczególnych statków również jest zmienną globalną.
+
