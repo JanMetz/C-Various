@@ -1,0 +1,23 @@
+Instrukcja uruchamiania:
+Aby odpalić program należy wykonać skrypt fryzjerzy_make.sh, a następnie plik fryzjerzy.out
+
+Opis:
+Program składa się z dwóch części - funkcji fryzjera oraz funkcji klienta.
+
+Fryzjer, jeżeli jest dostępny conajmniej jeden fotel, przyjmuje klienta i jego zapłatę. Następnie umieszcza pieniądze w kasie i rozpoczyna strzyżenie. Po zakończeniu strzyżenia, jeżeli należy wydać, wydaje resztę klientowi.
+
+Klient może znajdywać się w jednym z 2 stanów: oczekiwania na miejsce w salonie albo zarabiania pieniędzy.
+W fazie oczekiwania klient sprawdza, czy jest dostępne miejsce w poczekalni, jeżeli nie to wraca do pracy, jeżeli tak, to czeka na przyjęcie przez fryzjera, wysyła pieniądze i czeka na wykonanie usługi i otrzymanie reszty.
+W fazie pracowania klient pracuje, aż stan jego konta będzie wystarczający do zakupienia usługi. Następnie udaje się do salonu.
+
+W zadaniu dwukrotnie użyto pamięci współdzielonej - raz (cashRegister) do reprezentacji kasy fiskalnej, wspólnej dla wszystkich fryzjerów, i drugi raz (seatsTaken) w celu stworzenia zmiennej, wskazującej na ilość aktualnie zajętych siedzień, również wspolnej dla wszystkich fryzjerów. Aby upłynnić działanie programu i umożliwić wydawanie reszty na wypadek, gdyby większość klientów płaciła nominałami jej wymagającymi salon rozpoczyna pracę dysponując 40ma monetami o nominale 1 oraz 20ma o nominale 2.
+Ponadto w zadaniu występują 2 kolejki komunikatów - jedna (waitingRoom) służy klientom jako poczekalnia, w momencie gdy wszystkie fotele są zajęte. Druga (rest) służy do wydawania reszty odpowiedniemu klientowi.
+Oprócz tego w zadaniu występuje semafor (seats), służący do zapewnienia wyłącznego dostępu do zmienej seatsTaken oraz do kasy (cashRegister) wyłącznie jednemu fryzjerowi na raz. 
+W zadaniu występuje 6 fryzjerów oraz 10 klientów. Pojemność poczekalni wynosi 3, ilość siedzeń w salonie wynosi 5, koszt usługi strzyżenia wynosi 3.
+
+Funkcje obsługujące semafory zostały skopiowane z UNIX API Kompendium, pobranego ze strony przedmiotu na Ekursach, a następnie przerobione w celu zachowania ciągłości stylistycznej programu.
+
+Do korzystania z kolejek komunikatów stworzona została struktura Client przechowująca dane takie, jak:
+numer identyfikacyjny klienta (who)
+nominał monety, którą płaci klient (faceValue)
+ilość monet, które wysyła klient (coinNum)
