@@ -1,0 +1,7 @@
+Aby uruchomić plik glodomory.c należy wykonać skrypt glodomory_make.sh, a nastepnie uruchomic plik wykonywalny glodomory.out.
+
+Do realizacji zadania użyto kolejki komunikatów oraz semaforów. Kolejka komunikatów służyła do przesyłania między wątkami informacji mówiących który głodomór może zacząć starać się o widelce - takie rozwiązanie służy wprowadzeniu priorytetu dostępu do widelców. Semafory służyły do reprezentacji widelców.
+
+W zadaniu uczestniczą dwa typy procesów:
+Pierwszy z nich to kelner. Ma on za zadanie wyznaczać głodomora o największym priorytecie jedzenia oraz wyznaczać wagę poszczególnych posiłków. 
+Drugi typ to głodomór. Zadaniem głodomora jest czekać na komunikat o przyznanym najwyższym priorytecie, chwycić widelce (obniżyć semafory symoblizujące widelce), zjeść, zaktualizować ilość zjedzonego jedzenia w odpowiedniej zmiennej, a po skończonym posiłku odłożyć widelce (podnieść semafory). 
