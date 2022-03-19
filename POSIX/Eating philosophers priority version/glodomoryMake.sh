@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -Wall glodomory.c -o glodomory.out
+gcc -Wall glodomory.c -o glodomory.out -lpthread
