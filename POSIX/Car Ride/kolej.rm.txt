@@ -1,0 +1,16 @@
+Instrukcja uruchamiania:
+Aby odpalić program należy wykonać skrypt kolej_make.sh, a następnie plik kolej.out
+
+Opis:
+Program składa się z dwóch części - funkcji symbolizującej wagonik kolejki oraz funkcji symulującej działania pasażera.
+
+Kolejka wysyła sygnał o możliwości wejścia, czeka, aż zostanie zapełniona, po czym komunikuje ten fakt użytkownikowi. Następnie rusza w trasę, również to komunikując. Po zakończeniu jazdy czeka, aż wszyscy pasażerowie ją opuszczą wysyłając sygnał o zakończeniu jazdy.
+
+Pasażer może znajdywać się w jednym z 3 stanów: oczekiwania na miejsce w kolejce, jechania kolejką albo odpoczynku.
+W fazie oczekiwania pasażer stara się dostać do wagonika, jeżeli mu się udaje to komunikuje ten fakt na standardowe wyjście.
+W fazie jechania pasażer czeka, aż kolejka skończy swoją trasę, a następnie opuszcza wagon, komunikując ten fakt użytkownikowi.
+Po fazie jechania następuje faza relaksu, w której pasażer po chwili odpoczynku przechodzi do fazy oczekiwania.
+
+W zadaniu użyto 2 globalnych zmiennych sterujących: jedna z nich (placesLeft) komunikuje ilość wolnych miejsc w kolejce, druga (boardingAllowed) możliwość (lub jej brak), aby do kolejki wsiąść.
+Ponadto w zadaniu występują 3 zmienne warunkowe pthread_cond_t. Jedna z nich (carBoarded) służy do powiadomienia faktu wejścia kolejnego pasażera na pokład wagonika, druga (rideDone) służy do powiadamiania uczestników przejażdżki o jej zakończeniu, trzecia (readyForNewRide) powiadamia czekających o możliwości wejścia na pokład wagonika.
+W zadaniu został użyty również mutex (carMtx), odpowiadający za zapewnienie wyłącznego dostępu do zmiennej placesLeft tylko jednego wątku jednocześnie. 
