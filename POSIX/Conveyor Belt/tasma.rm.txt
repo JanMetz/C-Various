@@ -1,0 +1,5 @@
+Aby uruchomić plik tasma.c należy wykonać skrypt tasma_make.sh, a nastepnie uruchomic plik wykonywalny tasma.out.
+
+Do realizacji zadania użyto kolejki komunikatów, mutexów oraz sygnałów. Kolejka komunikatów służyła do przesyłania między wątkami informacji o wadze poszczególnych cegieł kładzionych na tasmociąg, mutexy służyły do upewnienia się o wyłącznym dostępie do pasa transmisyjnego tylko jednego wątku, a sygnały zostały użyte do komunikacji między wątkami dotyczącej aktualnego stanu pasa transmisyjnego. 
+
+W zadaniu uczestniczą dwa wątki - jeden z nich ma za zadanie kłaść cegły na taśmociąg, a drugi je z niego zdejmować. Każda akcja jest komunikowana użytkownikowi w postaci napisów wyświetlanych na standardowe wyjście.
